@@ -1,0 +1,155 @@
+.containerSliderDetalhes{
+    margin-top: 50px;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+.responsabiliza {
+    font-size: 10px;
+    color: #adadad;
+    line-height: 1em;
+}
+.containerImageSlider{
+    width: 500px;
+}
+.fotoImageSlider{
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.containerFotosMiniatura {
+    width: 100%;
+    margin: 0 0 ;
+    padding: 0;
+}
+.containerFotosMiniatura li{
+    display: inline-block;
+    padding-right: 4px;
+    cursor: pointer;
+}
+.fotoMiniatura{
+    border-radius: 2px;
+}
+.fotoMiniaturaSelecionada{
+    border-radius: 2px;
+    border: 1px solid #990000;
+}
+.containerDetalhes{
+    width: 560px;
+}
+
+.containerDetalhes .secao1{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #adadad;
+}
+
+.containerDetalhes .secao1 .marca{
+    font-size: 13px;
+}
+
+.containerDetalhes .secao1 .modelo{
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #b01717;
+}
+
+.containerDetalhes .containerMarcaIcones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.containerDetalhes .containerIcones {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 75px;
+}
+.containerDetalhes .containerIcone {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.containerDetalhes .secao2{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #adadad;
+}
+.containerDetalhes .secao2 .descricoes{
+    display: grid;
+    width:  60%;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 6px;
+}
+.containerDetalhes .secao2 .descricoes .containerdescricao {
+    padding: 15px 0;
+}
+.containerDetalhes .secao2 .descricoes .containerdescricao .descricaoTitulo{
+    font-size: 12px;
+    color: #666;
+}
+.containerDetalhes .secao2 .descricoes .containerdescricao .descricao{
+    display: block;
+    width: 100%;
+}
+.containerPreco{
+    width: 40%;
+    height: '100%';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preco {
+    font-size: 30px;
+    font-weight: 600;
+    color: #990000;
+}
+
+.containerDetalhes .secao3 {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+}
+
+.titulo {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-bottom: 10px;
+}
+.containerDetalhes .secao3 .containerOpcoes {
+    display: grid;
+    width:  100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 6px;
+}
+
+.containerDetalhes .secao3 .containerOpcao {
+    padding: 3px 0;
+}
+.containerDetalhes .secao3 .opcao {
+    font-size: 12px;
+}
+.containerDetalhes .secao4 {
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+}
+.containerDetalhes .secao4 .observacao {
+    font-size: 14px;
+}
+
+.containerDetalhes .secao5 {
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+}

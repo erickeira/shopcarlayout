@@ -1,0 +1,17 @@
+.container{
+    justify-content: center;
+    align-items: center;
+}
+.containerList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.containerTotal{
+    margin-bottom: 20px;
+}
+
+.containerTotal > span{
+    font-size: 14px;
+    color: #666;
+}

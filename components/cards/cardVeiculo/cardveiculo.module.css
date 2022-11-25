@@ -1,0 +1,50 @@
+.container {
+    background-color: white;
+    width: 170px;
+    height: 250px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+.container:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.foto{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.containerModelo{
+    height: 40px;
+}
+.modelo{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.containerInformacoes{
+    padding: 5px 10px;
+}
+.containerInfos {
+    display: grid;
+    width:  140px;
+    height: 43px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 6px;
+}
+/* .itemInfo{
+} */
+.info{
+    font-size: 10px;
+    color: gray;
+}
+.containerValor{
+    position: absolute;
+    width: 180px;
+}
+.valor {
+    font-size: 14px;
+    font-weight: 600;
+    color: #800;
+}
