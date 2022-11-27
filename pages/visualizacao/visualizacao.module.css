@@ -1,5 +1,6 @@
 .containerSliderDetalhes{
     margin-top: 50px;
+    margin-bottom: 200px;
     flex-direction: row;
     display: flex;
     justify-content: space-between;
@@ -33,6 +34,37 @@
 .fotoMiniaturaSelecionada{
     border-radius: 2px;
     border: 1px solid #990000;
+}
+
+.containerTabelaDeValores{
+    width: 100%;
+    padding: 0 10px;
+}
+
+.containerTabelaDeValores .titulo{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+.containerTabelaDeValores  .containerImagemInfos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.containerTabelaDeValores .containerInfoValor{
+    margin-bottom: 5px;
+    width: 260px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.containerTabelaDeValores .infoValor{
+    color: #666;
+    font-size: 14px;
+}
+.containerTabelaDeValores .valor{
+    font-size: 15px;
 }
 .containerDetalhes{
     width: 560px;
@@ -68,10 +100,21 @@
     justify-content: space-between;
     width: 75px;
 }
-.containerDetalhes .containerIcone {
+.containerDetalhes .secao1 .containerIcone {
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #fff;
+}
+.containerDetalhes .secao7 .containerIcone {
+    cursor: pointer;
+    min-width: 35px;
+    min-height: 35px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     justify-content: center;
     display: flex;
@@ -152,4 +195,105 @@
 .containerDetalhes .secao5 {
     padding: 15px 0;
     border-bottom: 1px solid #adadad;
+}
+
+
+.containerDetalhes .secao6 {
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+}
+
+.containerDetalhes .secao7 {
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+    flex-direction: row;
+    display: flex;
+}
+
+.containerDetalhes .secao7 .label{
+    font-size: 12px;
+}
+
+.containerDetalhes .secao8 {
+    padding: 15px 0;
+    border-bottom: 1px solid #adadad;
+}
+.containerDetalhes .secao8 .titulo{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.containerDetalhes .secao8 .containerAnuncianteFormulario{
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+}
+.containerDetalhes .secao8 .containerAnunciante{
+    width: 50%px;
+    padding: 0 10px;
+}
+
+.containerDetalhes .secao8 .containerAnunciante .containerLogoAnunciante{
+    width: 100%;
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.containerDetalhes .secao8 .containerAnunciante .nomeAnunciante{
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+    margin: 10px 0;
+}
+.containerDetalhes .secao8  .containerAnunciante .enderecoAnunciante{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+    vertical-align: baseline;
+    background: transparent;
+    color: #999;
+}
+
+.containerDetalhes .secao8  .containerAnunciante .containerIcone {
+    cursor: pointer;
+    min-height: 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 8px 20px;
+    display: flex;
+}
+.containerDetalhes .secao8  .containerFormulario{
+    width: 50%;
+    padding: 0 10px;
+}
+.containerDetalhes .secao8  .containerFormulario .inputTexto {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    padding: 0 10px;
+    margin: 5px 0 5px 0;
+}
+.containerDetalhes .secao9 {
+    padding: 35px 0;
+    display: flex;
+    justify-content: center;
+
+}
+.containerDetalhes .secao9 .label{
+    font-size: 14px;
+    font-weight: 600;
 }

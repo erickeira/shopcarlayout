@@ -2,12 +2,17 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { apiUrl, getUrlImg} from '../../utils';
+import { apiUrl, formatadorValor, getUrlImg} from '../../utils';
 import styles from  './visualizacao.module.css';
-import { MdDone, MdFavoriteBorder,MdShare } from 'react-icons/md'
+import { MdDone, MdFavoriteBorder,MdShare, MdCall, MdLocationOn, MdDirectionsCar, MdVerifiedUser } from 'react-icons/md'
+import { AiFillPrinter } from 'react-icons/ai'
+import {  FaClipboardList } from 'react-icons/fa'
+import termometro from '../../public/assets/termometro.png'
+
 
 export default function Visualizacao(props){
     const { veiculo } = props.data
+    const { anunciante } = veiculo
     const urlImg = getUrlImg(1000)
 
     const ImageSlider = () => {
@@ -31,9 +36,9 @@ export default function Visualizacao(props){
                 />
                 <ul className={styles.containerFotosMiniatura}>
                     {
-                        imagens.map(imagem => {
+                        imagens.map((imagem,index) => {
                             return(
-                                <li onClick={() => setImagemSelecionada(imagem)}>
+                                <li key={index} onClick={() => setImagemSelecionada(imagem)}>
                                     <Image
                                         src={getUrlImg(100) + imagem}
                                         width={50}
@@ -48,6 +53,43 @@ export default function Visualizacao(props){
                     }
                 </ul>
                 <span className={styles.responsabiliza}>*O ShopCar não se responsabiliza pelas informações e fotos contidas neste anúncio, sendo todas elas única e exclusivamente de responsabilidade do anunciante.</span>
+                {
+                    veiculo.tabela_valores && 
+                    <div className={styles.containerTabelaDeValores}>
+                        <span className={styles.titulo}>Tabela de valores SHOPCAR</span>
+                        <div className={styles.containerImagemInfos}>
+                            <Image
+                                src={termometro}
+                                alt=''
+                                style={{marginRight: 20}}
+                            />
+                            <div>
+                                <div className={styles.containerInfoValor}>
+                                    <span className={styles.infoValor}>Maior valor anunciado:</span>
+                                    <span className={styles.valor}>
+                                        {veiculo.tabela_valores.maximo}
+                                    </span>
+                                </div>
+                                <div className={styles.containerInfoValor}>
+                                    <span className={styles.infoValor}>Valor médio anunciado:</span>
+                                    <span className={styles.valor}>
+                                        {veiculo.tabela_valores.media}
+                                    </span>
+                                </div>
+                                <div className={styles.containerInfoValor}>
+                                    <span className={styles.infoValor}>Menor valor anunciado:</span>
+                                    <span className={styles.valor}>
+                                        {veiculo.tabela_valores.minimo}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <span className={styles.responsabiliza}>
+                        **Esta tabela é uma referência de valores de veículos anunciados no site. Em caso de dúvidas, realize uma consulta à tabela FIPE através do site www.fipe.org.br
+                        </span>
+                    </div>
+                }
+
             </div>
         )
     }
@@ -102,7 +144,7 @@ export default function Visualizacao(props){
 
                     </div>
                     <div className={styles.containerPreco}>
-                        <span className={styles.preco}>R$ {veiculo.preco},00</span>
+                        <span className={styles.preco}>{veiculo.preco ? formatadorValor(veiculo.preco) : 'Consulte-nos'}</span>
                     </div>
                 </div>
                 {
@@ -134,21 +176,134 @@ export default function Visualizacao(props){
                     veiculo.maisopcionais && 
                     <div className={styles.secao4}>
                             <div className={styles.containerObservacoes}>
-                                <span className={styles.titulo}>Observações do anunciante</span>
+                                <span className={styles.titulo}>Mais Opcionais</span>
                                 <span className={styles.observacao}>{veiculo.maisopcionais}</span>
                             </div>
                     </div>
                 }
+                                {
+                        veiculo.descricao && 
+                        <div className={styles.secao5}>
+                            <div className={styles.containerObservacoes}>
+                                <span className={styles.titulo}>Descrição do veículo</span>
+                                <span className={styles.observacao}>{veiculo.descricao}</span>
+                            </div>
+                        </div>
+                }
 
                 {
                         veiculo.observacoes && 
-                        <div className={styles.secao5}>
+                        <div className={styles.secao6}>
                             <div className={styles.containerObservacoes}>
                                 <span className={styles.titulo}>Observações do anunciante</span>
                                 <span className={styles.observacao}>{veiculo.observacoes}</span>
                             </div>
                         </div>
                 }
+                <div className={styles.secao7}>
+                    <div className={[styles.containerIcone]} style={{width:110, marginRight: 10}}>
+                        <FaClipboardList />
+                        <span className={styles.label}>Ficha técnica</span>
+                    </div>
+                    <div className={[styles.containerIcone]} style={{width:110, marginRight: 10}}>
+                        <AiFillPrinter />
+                        <span className={styles.label}>Imprimir</span>
+                    </div>
+                    <div className={[styles.containerIcone]} style={{width:110, marginRight: 10}}>
+                        <AiFillPrinter />
+                        <span className={styles.label}>Reportar erro</span>
+                    </div>
+                </div>
+                <div className={styles.secao8}>
+                    <span className={styles.titulo}>Entre em contato com o anunciante</span>
+                    <div className={styles.containerAnuncianteFormulario}>
+                        <div className={styles.containerAnunciante}>
+                            <div className={styles.containerLogoAnunciante}>
+                                <Image
+                                    src={getUrlImg(1000, 'lojas') + anunciante.logomarca}
+                                    width={100}
+                                    height={50}
+                                    // className={}
+                                    alt={``}
+                                    priority={1}
+                                />
+                            </div>
+                            <span className={styles.nomeAnunciante}>{anunciante.nome}</span>
+                            <span className={styles.enderecoAnunciante}>
+                                {`${anunciante.endereco} - ${anunciante.bairro} - ${anunciante.cidade} / ${anunciante.uf}`}
+                            </span>
+                            <div className={styles.containerIcone} style={{marginTop: 10}}>
+                                <MdCall size={20} style={{marginRight: 5}}/>
+                                <span>Ver telefones</span>
+                            </div>
+                            <div className={styles.containerIcone} style={{marginTop: 10}}>
+                                <MdLocationOn size={20} style={{marginRight: 5}}/>
+                                <span>Mapa</span>
+                            </div>
+                            <div className={styles.containerIcone} style={{marginTop: 10}}>
+                                <MdDirectionsCar size={20} style={{marginRight: 5}}/>
+                                <span>Estoque da Loja</span>
+                            </div>
+                        </div>
+                        <div className={styles.containerFormulario}>
+                            <form>
+                                 <input 
+                                    type="text" 
+                                    className={styles.inputTexto} 
+                                    id={'nomeProposta'} 
+                                    name={'nomeENomesta'}
+                                    placeholder={'Nome'}
+                                />
+                                <input 
+                                    type="text" 
+                                    className={styles.inputTexto} 
+                                    id={'emailProposta'} 
+                                    name={'emailProposta'}
+                                    placeholder={'E-mail'}
+                                />
+                                <input 
+                                    type="text" 
+                                    className={styles.inputTexto} 
+                                    id={'telefoneProposta'} 
+                                    name={'telefoneProposta'}
+                                    placeholder={'Telefone'}
+                                />
+                                <input 
+                                    type="text" 
+                                    className={styles.inputTexto} 
+                                    id={'cidadeUfProposta'} 
+                                    name={'cidadeUfProposta'}
+                                    placeholder={'Cidade/UF'}
+                                />
+                                <textarea 
+                                    rows="4" 
+                                    cols="50"
+                                    type="area" 
+                                    className={styles.inputTexto} 
+                                    id={'descricaoProposta'} 
+                                    name={'descricaoProposta'}
+                                    placeholder={'Nome'}
+                                    style={{height: 100, paddingTop: 10}}
+                                >
+                                    Olá, Gostaria de mais informações deste veículo. Por favor entre em contato.
+                                </textarea>
+                                <input 
+                                    type={'submit'}
+                                     value='Enviar Proposta' 
+                                     className={styles.inputTexto} 
+                                     style={{
+                                        backgroundColor: '#990000', 
+                                        color: '#fff',
+                                    }}
+                                />
+                       </form>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.secao9}>
+                    <MdVerifiedUser/>
+                    <span className={styles.label}>Anunciante do Shopcar desde {anunciante.desde}</span>
+                </div>
 
             </div>
         )
@@ -180,3 +335,4 @@ export async function getServerSideProps(context) {
       props: { data }, // will be passed to the page component as props
     }
 }
+

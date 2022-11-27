@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import VeiculosList from '../components/veiculosList'
 import { apiUrl } from '../utils'
 import { MdDone } from 'react-icons/md'
+import MenuLateral from '../components/menuLateral'
+import BuscaLateral from '../components/buscaLateral'
 
 export async function getServerSideProps(context) {
   const res = await fetch(apiUrl, {
@@ -41,13 +43,18 @@ export default function Home(props) {
   const [totalResultados, setTotalResultados] = useState(0)
   return (
     <div className={styles.container}>
-      <VeiculosList
-        veiculos={destaques}
-        pagina={pagina}
-        totalPaginas={totalPaginas}
-        totalResultados={totalResultados}
-        callbackmudarpagina={(res) => setPagina(res)}
-      />
+      <div  className={styles.containerMenuList}>
+        <MenuLateral>
+          <BuscaLateral/>
+        </MenuLateral>
+        {/* <VeiculosList
+          veiculos={destaques}
+          pagina={pagina}
+          totalPaginas={totalPaginas}
+          totalResultados={totalResultados}
+          callbackmudarpagina={(res) => setPagina(res)}
+        /> */}
+      </div>
     </div>
   )
 }

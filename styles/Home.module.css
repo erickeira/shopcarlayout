@@ -1,0 +1,4 @@
+.containerMenuList {
+    display: flex;
+    flex-direction: row;
+}
