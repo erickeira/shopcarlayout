@@ -1,7 +1,7 @@
 
 import styles from './cardveiculo.module.css'
 import Image from 'next/image'
-import { formatadorValor, urlImg } from '../../../utils'
+import { formatadorValor, removerSpecials, urlImg } from '../../../utils'
 import Link from 'next/link'
 
 export default function CardVeiculo(props) {
@@ -30,8 +30,10 @@ export default function CardVeiculo(props) {
     temfotos,
     zerok,
   } = data
+  const urlamigavel = `${marca.toLowerCase().replace(` `, `-`)}-${removerSpecials(modelo.toLowerCase().replace(` `, `-`))}-${removerSpecials(anomodelo.toLowerCase().replace(` `, `-`))}-${id}`
+  console.log(data)
   return (
-    <Link href={`/visualizacao/${id}`}>
+    <Link href={`/visualizacao/${urlamigavel}`,}>
       <div className={styles.container}>
           <Image
               src={urlImg + data.foto1}

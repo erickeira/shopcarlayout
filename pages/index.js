@@ -47,13 +47,13 @@ export default function Home(props) {
         <MenuLateral>
           <BuscaLateral/>
         </MenuLateral>
-        {/* <VeiculosList
+        <VeiculosList
           veiculos={destaques}
           pagina={pagina}
           totalPaginas={totalPaginas}
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
-        /> */}
+        />
       </div>
     </div>
   )

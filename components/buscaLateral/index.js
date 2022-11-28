@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from './buscalateral.module.css'
 import { apiUrl } from '../../utils'
 import InputSelect from '../inputSelect';
+import Link from 'next/link';
 
 export default function BuscaLateral(props){
     const { avancada } = props
@@ -36,6 +37,7 @@ export default function BuscaLateral(props){
         categorias: [] 
     });
 
+
     useEffect(() => {
         getTipos()
     },[])
@@ -43,6 +45,10 @@ export default function BuscaLateral(props){
     function mudarDadosBusca(novoDado){
         setDadosBusca({...dadosBusca, ...novoDado})
     }
+
+    useEffect(() => {
+        if(dadosBusca.tipo) getDados()
+    },[dadosBusca])
 
     async function getTipos(){
         const res = await fetch(apiUrl, {
@@ -56,6 +62,12 @@ export default function BuscaLateral(props){
           setTipos(auxData.tiposVeiculos)
     }   
 
+    function clearDados(valorTipo) {
+        setDadosBusca({ tipo: valorTipo ? valorTipo : dadosBusca.tipo, marca: "", modelo: "", versao: "", cor: "", combustivel: "", cidade: "", anode: "", anoate: "", valorde: "", valorate: "", estadouso: "", opcionais: [], categorias: [] }); 
+        // setValueFrom('');setValueTo('');
+        setModelos([]);setVersoes([]);setCores([]);setCidades([]);setCombustiveis([]);setOpcionais([]);setCategorias([]);
+    }
+
     async function getDados(){
         const res = await fetch(apiUrl, {
             method: 'POST',
@@ -66,33 +78,62 @@ export default function BuscaLateral(props){
                       acao: "obterveiculos",
                       params: { 
                           busca: "veiculos",
-                          filtros: avancada ? ['Tudo'] : ['Marcas','Modelos']  } 
+                          filtros: avancada ? ['Tudo'] : ['Marcas','Modelos'],
+                          ...dadosBusca  },
+                          
                   }
               ]
            }),
           })
-          let auxData = await res.json()
-          console.log(auxData)
-        //   Object.keys(res).includes('marcas') && setMarcas(res.marcas);
-        //   Object.keys(res).includes('modelos') && setModelos(res.modelos);
-        //   Object.keys(res).includes('versoes') ? setVersoes(res.versoes) : setVersoes([]);
-        //   Object.keys(res).includes('cores') && setCores(res.cores);
-        //   Object.keys(res).includes('combustiveis') && setCombustiveis(res.combustiveis);
-        //   Object.keys(res).includes('cidades') && setCidades(res.cidades);
-        //   Object.keys(res).includes('opcionais') && setOpcionais(res.opcionais);
-        //   Object.keys(res).includes('categorias') && setCategorias(res.categorias);
+          let data = await res.json()
+          console.log(data)
+          if (Object.keys(data.busca).includes('filtros') && data.busca.filtros !== null) {   
+            Object.keys(data.busca.filtros).includes('marcas') && setMarcas(data.busca.filtros.marcas);
+            //   Object.keys(res).includes('modelos') && setModelos(res.modelos);
+            //   Object.keys(res).includes('versoes') ? setVersoes(res.versoes) : setVersoes([]);
+            //   Object.keys(res).includes('cores') && setCores(res.cores);
+            //   Object.keys(res).includes('combustiveis') && setCombustiveis(res.combustiveis);
+            //   Object.keys(res).includes('cidades') && setCidades(res.cidades);
+            //   Object.keys(res).includes('opcionais') && setOpcionais(res.opcionais);
+            //   Object.keys(res).includes('categorias') && setCategorias(res.categorias);
+          }
     }
-    
+
+    function handleBusca(){
+        getDados()
+    }
+
+    const BotaoBusca = () => {
+        if(!dadosBusca.tipo && !dadosBusca.marca){
+            return(
+                <div className={styles.containerBotaoBuscaDesativado}>
+                    <span>Buscar</span>
+                </div>
+            )
+        }
+        return(
+            <Link href={`/busca`}>
+                <div onClick={() => handleBusca()} className={styles.containerBotaoBusca}>
+                    <span>Buscar</span>
+                </div>
+            </Link>
+        )
+
+    }
+
     return(
         <div className={styles.container}> 
             <InputSelect
                 titulo={'Tipo'}
                 options={tipos.map(tipo => {return {value: tipo.nome, label: tipo.nome}}) }
+                callbackchange={(e) => clearDados(e.value)}
             />
             <InputSelect
                 titulo={'Marca'}
-                options={tipos.map(tipo => {return {value: tipo.nome, label: tipo.nome}}) }
+                options={marcas?.map(marca => {return {value: marca.nome, label: marca.nome}}) }
+                callbackchange={(e) => mudarDadosBusca({marca : e.value})}
             />
+            <BotaoBusca/>
         </div>
     )
 }
