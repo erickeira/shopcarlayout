@@ -22,7 +22,7 @@ export default function InputSelect(props){
                         // width: 200
                     })
                   }}
-                value={selecionado}
+                value={options.find(item => item.value === selecionado)}
             />
         </div>
     )

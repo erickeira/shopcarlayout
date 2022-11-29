@@ -1,0 +1,15 @@
+.container{
+    margin-top: 20px;
+    width: 200px;
+}
+.containerValues{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.value{
+    font-size: 15px;
+}
+.titulo {
+    font-size: 14px;
+}

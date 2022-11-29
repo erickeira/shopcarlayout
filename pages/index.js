@@ -53,6 +53,7 @@ export default function Home(props) {
           totalPaginas={totalPaginas}
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
+          grade
         />
       </div>
     </div>

@@ -3,7 +3,7 @@ const urlImg = "https://cdn-dev.shopcar.com.br/redim/360/stored/veiculos/"
 
 
 function formatadorValor(valor){
-    return valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    return parseInt(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
 
 function getUrlImg(qualidade, tipo){

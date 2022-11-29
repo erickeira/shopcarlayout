@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from './buscalateral.module.css'
 import { apiUrl } from '../../utils'
-import InputSelect from '../inputSelect';
+import InputSelect from '../inputs/inputSelect';
 import Link from 'next/link';
 import { useRouter } from "next/router"
 import { AuthContext } from '../../context';
+import InputRangeSlider from '../inputs/inputRangeSlider';
 
 export default function BuscaLateral(props){
     const {
@@ -57,6 +58,9 @@ export default function BuscaLateral(props){
                 options={marcas?.map(marca => {return {value: marca.nome, label: marca.nome}}) }
                 callbackchange={(e) => mudarDadosBusca({marca : e.value})}
                 selecionado={dadosBusca.marca}
+            />
+            <InputRangeSlider
+
             />
             <BotaoBusca/>
         </div>

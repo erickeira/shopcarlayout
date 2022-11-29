@@ -4,6 +4,9 @@
     width: 780px;
 }
 .containerList{
+
+}
+.containerGrade{
     display: flex;
     flex-wrap: wrap;
     gap: 15px;

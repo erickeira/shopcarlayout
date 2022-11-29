@@ -7,7 +7,7 @@ import { MdDone } from 'react-icons/md'
 import MenuLateral from '../../components/menuLateral'
 import BuscaLateral from '../../components/buscaLateral'
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const res = await fetch(apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
