@@ -2,7 +2,7 @@ import Select from 'react-select'
 import	styles from './inputselect.module.css'
 
 export default function InputSelect(props){
-    const { options, titulo, callbackchange} = props
+    const { options, titulo, callbackchange, selecionado} = props
     return(
         <div  className={styles.container}>
             <div className={styles.containerTitulo}>
@@ -19,9 +19,10 @@ export default function InputSelect(props){
                     }),
                     option: (baseStyles, state) => ({
                         ...baseStyles,
-                        width: 200
+                        // width: 200
                     })
                   }}
+                value={selecionado}
             />
         </div>
     )

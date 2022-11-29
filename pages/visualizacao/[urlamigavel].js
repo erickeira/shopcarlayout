@@ -319,16 +319,13 @@ export default function Visualizacao(props){
 }
 
 export async function getServerSideProps(context) {
-    const { params } = context
-    const auxId = params.urlamigavel.split(`-`)
-    const id = auxId[3] || 1092998
-    console.log(id)
+    const { query } = context
     const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: JSON.stringify({ request:
           [		
-              { acao: "obterveiculo" , params: { id:id } }
+              { acao: "obterveiculo" , params: { id: query.id } }
           ]
         }),
     })

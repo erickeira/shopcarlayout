@@ -30,10 +30,15 @@ export default function CardVeiculo(props) {
     temfotos,
     zerok,
   } = data
-  const urlamigavel = `${marca.toLowerCase().replace(` `, `-`)}-${removerSpecials(modelo.toLowerCase().replace(` `, `-`))}-${removerSpecials(anomodelo.toLowerCase().replace(` `, `-`))}-${id}`
+  const urlamigavel = `/visualizacao/${marca.toLowerCase().replace(` `, `-`)}-${removerSpecials(modelo.toLowerCase().replace(` `, `-`))}-${removerSpecials(anomodelo.toLowerCase().replace(` `, `-`))}`
   console.log(data)
   return (
-    <Link href={`/visualizacao/${urlamigavel}`,}>
+    <Link 
+      href={{
+        pathname: urlamigavel ,
+        query: { id: id },
+      }}
+    >
       <div className={styles.container}>
           <Image
               src={urlImg + data.foto1}
