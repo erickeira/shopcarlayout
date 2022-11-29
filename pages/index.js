@@ -2,12 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import CardVeiculo from '../components/cards/cardVeiculo'
 import styles from '../styles/Home.module.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import VeiculosList from '../components/veiculosList'
 import { apiUrl } from '../utils'
 import { MdDone } from 'react-icons/md'
 import MenuLateral from '../components/menuLateral'
 import BuscaLateral from '../components/buscaLateral'
+import Ads from '../components/ads/ads'
+import { AuthContext } from '../context'
 
 export async function getServerSideProps(context) {
   const res = await fetch(apiUrl, {
@@ -15,7 +17,7 @@ export async function getServerSideProps(context) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: JSON.stringify({ request:
       [		
-          { acao: "obterveiculos" , params: { busca: "destaques", limite: 15, ordenacao: 'random' } },
+          { acao: "obterveiculos" , params: { busca: "destaques", limite: 8, ordenacao: 'random' } },
           { acao: "obternoticias" , params: { filtrar: 'destaques', limite: 5 } }
       ]
     }),
@@ -41,6 +43,9 @@ export default function Home(props) {
   const [pagina, setPagina] = useState(1)
   const [totalPaginas, setTotalPaginas] = useState(1)
   const [totalResultados, setTotalResultados] = useState(0)
+  const { setPageTitle } = useContext(AuthContext) 
+  useEffect(() => {setPageTitle(``)},[busca])
+
   return (
     <div className={styles.container}>
       <div  className={styles.containerMenuList}>
@@ -54,7 +59,9 @@ export default function Home(props) {
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
           grade
+          vermais
         />
+        <Ads/>
       </div>
     </div>
   )

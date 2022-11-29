@@ -3,7 +3,8 @@ import styles from './cardveiculo.module.css'
 import Image from 'next/image'
 import { formatadorValor, getUrlImg, removerSpecialsUrl, urlImg } from '../../../utils'
 import Link from 'next/link'
-import {MdLocalGasStation} from 'react-icons/md'
+import {MdLocalGasStation, MdDateRange} from 'react-icons/md'
+import {GiFoundryBucket} from 'react-icons/gi'
 
 export default function CardVeiculo(props) {
   const { data, grade} = props
@@ -32,7 +33,7 @@ export default function CardVeiculo(props) {
     zerok,
   } = data
   const urlamigavel = `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}`
-  console.log(data)
+
   const GradeItem = () => {
     return(
       <Link 
@@ -112,19 +113,19 @@ export default function CardVeiculo(props) {
                 <span className={styles.modeloList}>{modelo}</span>
               </div>  
               <div className={styles.containerInfoValorAnunciante}>
-                <div className={styles.containerInfos}>
+                <div className={styles.containerInfosList}>
                   <div className={styles.containerInfosGrid}>
                     {
                       anomodelo &&
                       <div className={styles.itemInfoList}>
-                        <MdLocalGasStation size={16}/>
+                        <MdDateRange size={16}/>
                         <span className={styles.infoList}>{ano}/{anomodelo}</span>
                       </div>
                     }
                     {
                       cor &&
                       <div className={styles.itemInfoList}>
-                        <MdLocalGasStation size={16}/>
+                        <GiFoundryBucket size={16}/>
                         <span className={styles.infoList}>{cor}</span>
                       </div>
                     }

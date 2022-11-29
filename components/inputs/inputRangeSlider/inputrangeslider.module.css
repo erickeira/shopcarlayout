@@ -1,5 +1,5 @@
 .container{
-    margin-top: 20px;
+    margin: 20px 0;
     width: 200px;
 }
 .containerValues{
@@ -8,7 +8,7 @@
     justify-content: space-between;
 }
 .value{
-    font-size: 15px;
+    font-size: 12px;
 }
 .titulo {
     font-size: 14px;

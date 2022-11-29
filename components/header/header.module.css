@@ -1,0 +1,37 @@
+.containerHeader{
+    margin-bottom:  30px;
+}
+.nav {
+	position: sticky;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	top: 0;
+}
+
+.subnav {
+	position: sticky;
+	bottom: 0;
+	top: 60px; 
+}
+
+
+.nav__title {
+    margin: 0px 0px;
+}
+.nav__item {
+    display: inline-block;
+    margin: 0px 15px;
+    font-size: 13px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+.nav__itemContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}

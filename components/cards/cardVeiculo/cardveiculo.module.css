@@ -77,7 +77,7 @@
     display: flex;
     flex-direction: row;
 }
-.containerInfos{
+.containerInfosList{
     width: 250px;
     height: 100%;
 }

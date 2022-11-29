@@ -1,19 +1,25 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { apiUrl, formatadorValor, getUrlImg} from '../../utils';
 import styles from  './visualizacao.module.css';
 import { MdDone, MdFavoriteBorder,MdShare, MdCall, MdLocationOn, MdDirectionsCar, MdVerifiedUser } from 'react-icons/md'
 import { AiFillPrinter } from 'react-icons/ai'
 import {  FaClipboardList } from 'react-icons/fa'
 import termometro from '../../public/assets/termometro.png'
+import { AuthContext } from '../../context';
 
 
 export default function Visualizacao(props){
+    const {setPageTitle} = useContext(AuthContext)
     const { veiculo } = props.data
     const { anunciante } = veiculo
     const urlImg = getUrlImg(1000)
+
+    useEffect(() => {
+        setPageTitle(`${veiculo.marca} - ${veiculo.modelo}`)
+    },[veiculo])
 
     const ImageSlider = () => {
         const imagens = veiculo.fotos

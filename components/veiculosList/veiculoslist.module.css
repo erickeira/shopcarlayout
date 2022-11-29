@@ -4,7 +4,11 @@
     width: 780px;
 }
 .containerList{
-
+    overflow: auto;
+    height: 100vh;
+}
+.containerList::-webkit-scrollbar {
+    display: none;
 }
 .containerGrade{
     display: flex;
@@ -18,4 +22,18 @@
 .containerTotal > span{
     font-size: 14px;
     color: #666;
+}
+
+.containerVerMais{
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.vermais{
+    color: #800;
 }

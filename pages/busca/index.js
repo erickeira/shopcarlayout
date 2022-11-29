@@ -1,11 +1,12 @@
 
 import styles from './busca.module.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import VeiculosList from '../../components/veiculosList'
 import { apiUrl } from '../../utils'
 import { MdDone } from 'react-icons/md'
 import MenuLateral from '../../components/menuLateral'
 import BuscaLateral from '../../components/buscaLateral'
+import { AuthContext } from '../../context'
 
 export async function getStaticProps(context) {
   const res = await fetch(apiUrl, {
@@ -39,6 +40,12 @@ export default function Busca(props) {
   const [pagina, setPagina] = useState(1)
   const [totalPaginas, setTotalPaginas] = useState(1)
   const [totalResultados, setTotalResultados] = useState(0)
+  const {setPageTitle, dadosBusca} = useContext(AuthContext)
+
+  useEffect(() =>{
+    setPageTitle(`Busca por ${dadosBusca.tipo} ${dadosBusca.marca} nos Classificados de Veículos do SHOPCAR`)
+  },[])
+
   return (
     <div className={styles.container}>
       <div  className={styles.containerMenuList}>

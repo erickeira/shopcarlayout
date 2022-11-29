@@ -5,8 +5,9 @@ import { apiUrl } from "../utils";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+    const [pageTitle, setPageTitle] = useState(``)
     const router = useRouter();
-    const [avancada, setAvancada ] = useState(true);
+    const [avancada, setAvancada ] = useState(false);
     const [ loadingContext, setLoadingContext ] = useState(true);
     const [ tipos, setTipos ] = useState([]);    
     const [ marcas, setMarcas ] = useState([]);    
@@ -106,6 +107,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={{
             avancada,
+            setAvancada,
             loadingContext,
             tipos,
             marcas,
@@ -120,7 +122,9 @@ const AuthProvider = ({ children }) => {
             dadosBusca,
             mudarDadosBusca,
             clearDados,
-            handleBuscar
+            handleBuscar,
+            pageTitle,
+            setPageTitle
         }}>
             { children }
         </AuthContext.Provider>

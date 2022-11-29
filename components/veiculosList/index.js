@@ -1,8 +1,9 @@
 import CardVeiculo from '../cards/cardVeiculo';
 import styles from './veiculoslist.module.css';
+import {MdKeyboardArrowRight} from 'react-icons/md'
 
 export default function VeiculosList(props) {
-    const { veiculos, pagina, totalPaginas, totalResultados, callbackmudarpagina, grade} = props
+    const { veiculos, pagina, totalPaginas, totalResultados, callbackmudarpagina, grade, vermais} = props
     
     return(
       <div className={styles.container}>
@@ -22,7 +23,16 @@ export default function VeiculosList(props) {
               })
             }
         </div>
+        {
+          vermais  ?
+          <div className={styles.containerVerMais}>
+            <span className={styles.vermais}>Ver mais</span>
+            <MdKeyboardArrowRight color={'#800'}/>
+          </div>
+          : null
+        }
       </div>
 
     )
 }
+
