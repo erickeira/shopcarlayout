@@ -8,6 +8,7 @@ import { AuthContext } from '../../context';
 import InputRangeSlider from '../inputs/inputRangeSlider';
 import InputSelectMulti from '../inputs/inputSelectMulti';
 import {MdAdd, MdRemove} from 'react-icons/md'
+import BasicSelect from '../inputs/inputTeste';
 
 export default function BuscaLateral(props){
     const {
@@ -29,6 +30,7 @@ export default function BuscaLateral(props){
         clearDados,
         handleBuscar
     } = useContext(AuthContext)
+    
     const BotaoBusca = () => {
         if(!dadosBusca.tipo && !dadosBusca.marca){
             return(
@@ -50,7 +52,7 @@ export default function BuscaLateral(props){
     return(
         <div className={styles.container}>
             <div className={styles.containerHeader}>
-                <span>Busca</span>
+                <span className={styles.buscaLabel}>Busca</span>
                 {
                     avancada ?
                     <MdRemove onClick={() => setAvancada(!avancada)} size={20} className={styles.addRemove}/>

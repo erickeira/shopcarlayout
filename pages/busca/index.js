@@ -7,6 +7,7 @@ import { MdDone } from 'react-icons/md'
 import MenuLateral from '../../components/menuLateral'
 import BuscaLateral from '../../components/buscaLateral'
 import { AuthContext } from '../../context'
+import Ads from '../../components/ads/ads'
 
 export async function getStaticProps(context) {
   const res = await fetch(apiUrl, {
@@ -59,6 +60,7 @@ export default function Busca(props) {
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
         />
+        <Ads/>
       </div>
     </div>
   )

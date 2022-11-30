@@ -6,6 +6,7 @@
 .containerList{
     overflow: auto;
     height: 100vh;
+    width: 740px;
 }
 .containerList::-webkit-scrollbar {
     display: none;
@@ -20,7 +21,8 @@
 }
 
 .containerTotal > span{
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
     color: #666;
 }
 

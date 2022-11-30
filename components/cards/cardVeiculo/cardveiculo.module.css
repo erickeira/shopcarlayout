@@ -53,7 +53,7 @@
 
 .containerModeloInfos{
     padding: 10px 10px;
-    width: 100%;
+    width: 90%;
 }
 .containerList{
     height: 120px;
@@ -109,7 +109,7 @@
 }
 
 .containerValorList{
-    width: 220px;
+    width: 170px;
     /* justify-content: flex-end;
     display:flexbox; */
 }

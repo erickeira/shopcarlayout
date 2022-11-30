@@ -15,38 +15,38 @@ export default function Header(){
                 <link rel="shortcut icon" href="https://cdn.shopcar.com.br/favicon.ico"/>
             </Head>
             <header className={styles.containerHeader}>
-
-
-                <nav className={styles.nav}>
-                    <Link href={`/`}>
-                        <div className={styles.nav__title}>
-                            <Image
-                                src="https://cdn-dev.shopcar.com.br/images/logo.png"
-                                alt={`Logo - SHOPCAR`}
-                                width={250}
-                                height={69}
-                            />
-                        </div>
-                    </Link>
-                    <ul className={styles.nav__list}>
-                        <li className={styles.nav__item}>
-                            <div className={styles.nav__itemContainer}>
-                                COMPRE SEU VEÍCULO
-                                <MdKeyboardArrowDown size={25}/>
+                <div className={styles.containerConteudo}>
+                    <nav className={styles.nav}>
+                        <Link href={`/`}>
+                            <div className={styles.nav__title}>
+                                <Image
+                                    src="https://cdn-dev.shopcar.com.br/images/logo.png"
+                                    alt={`Logo - SHOPCAR`}
+                                    width={250}
+                                    height={69}
+                                />
                             </div>
-                        </li>
-                        <li className={styles.nav__item}>
-                            <div className={styles.nav__itemContainer}>
-                                VENDA SEU VEÍCULO
-                                <MdKeyboardArrowDown size={25}/>
-                            </div>
-                        </li>
-                        <li className={styles.nav__item}>SERVIÇOS</li>
-                        <li className={styles.nav__item}>NOTÍCIAS</li>
-                        <li className={styles.nav__item}>IMÓVEIS</li>
-                        <li className={styles.nav__item}>NÁUTICOS</li>
-                    </ul>
-                </nav>
+                        </Link>
+                        <ul className={styles.nav__list}>
+                            <li className={styles.nav__item}>
+                                <div className={styles.nav__itemContainer}>
+                                    COMPRE SEU VEÍCULO
+                                    <MdKeyboardArrowDown size={25}/>
+                                </div>
+                            </li>
+                            <li className={styles.nav__item}>
+                                <div className={styles.nav__itemContainer}>
+                                    VENDA SEU VEÍCULO
+                                    <MdKeyboardArrowDown size={25}/>
+                                </div>
+                            </li>
+                            <li className={styles.nav__item}>SERVIÇOS</li>
+                            <li className={styles.nav__item}>NOTÍCIAS</li>
+                            <li className={styles.nav__item}>IMÓVEIS</li>
+                            <li className={styles.nav__item}>NÁUTICOS</li>
+                        </ul>
+                    </nav>
+                </div>
             </header>
         </>
     )

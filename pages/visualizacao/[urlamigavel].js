@@ -9,6 +9,7 @@ import { AiFillPrinter } from 'react-icons/ai'
 import {  FaClipboardList } from 'react-icons/fa'
 import termometro from '../../public/assets/termometro.png'
 import { AuthContext } from '../../context';
+import Ads from '../../components/ads/ads';
 
 
 export default function Visualizacao(props){
@@ -319,6 +320,7 @@ export default function Visualizacao(props){
             <div className={styles.containerSliderDetalhes}>
                 <ImageSlider/>
                 <Detalhes/>
+                <Ads/>
             </div>
         </div>
     )

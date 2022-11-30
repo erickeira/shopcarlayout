@@ -36,8 +36,8 @@ export default function InputRangeSlider(props) {
         disableSwap
       />
       <div className={styles.containerValues}>
-        <span className={styles.value}>De: {labelFormat(value[0])}</span>
-        <span className={styles.value}>Até: {labelFormat(value[1])}</span>
+        <span className={styles.value}>{labelFormat(value[0])}</span>
+        <span className={styles.value}>{labelFormat(value[1])}</span>
       </div>
     </div>
   );

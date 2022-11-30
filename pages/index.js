@@ -10,6 +10,7 @@ import MenuLateral from '../components/menuLateral'
 import BuscaLateral from '../components/buscaLateral'
 import Ads from '../components/ads/ads'
 import { AuthContext } from '../context'
+import {MdFilterListAlt, MdStore} from 'react-icons/md'
 
 export async function getServerSideProps(context) {
   const res = await fetch(apiUrl, {
@@ -51,10 +52,24 @@ export default function Home(props) {
       <div  className={styles.containerMenuList}>
         <MenuLateral>
           <BuscaLateral/>
+          <div className={styles.containerButtonMenu}>
+            <MdFilterListAlt size={25}/>
+            <span>
+              Categorias
+            </span>
+          </div>
+          <div className={styles.containerButtonMenu}>
+            <MdStore size={25}/>
+            <span>
+              Lojas
+            </span>
+          </div>
+          
         </MenuLateral>
         <VeiculosList
           veiculos={destaques}
           pagina={pagina}
+          labelTitulo={'Destaques'}
           totalPaginas={totalPaginas}
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
