@@ -20,7 +20,7 @@ export default function InputSelect(props){
                     }),
                     option: (baseStyles, state) => ({
                         ...baseStyles,
-                        // width: 200
+                        width: 240
                     })
                   }}
                 value={options.find(item => item.value === selecionado)}

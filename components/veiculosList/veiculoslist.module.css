@@ -17,7 +17,9 @@
     gap: 15px;
 }
 .containerTotal{
-    margin-bottom: 20px;
+    padding: 20px 0;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    z-index: 10;
 }
 
 .containerTotal > span{

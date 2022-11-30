@@ -1,12 +1,14 @@
 import { useState, createContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { apiUrl } from "../utils";
+import requisicao from "../pages/api";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [pageTitle, setPageTitle] = useState(``)
     const router = useRouter();
+    const [pagina, setPagina] = useState(1)
     const [avancada, setAvancada ] = useState(false);
     const [ loadingContext, setLoadingContext ] = useState(true);
     const [ tipos, setTipos ] = useState([]);    
@@ -37,18 +39,23 @@ const AuthProvider = ({ children }) => {
         opcionais: [], 
         categorias: [] 
     });
+    const [veiculos, setVeiculos] = useState([])
+    const [totalResultados, setTotalResultados] = useState([])
 
     useEffect(() => {
         getTipos()
     },[])
+    useEffect(() => {
+        getDados()
+    },[pagina])
 
     function mudarDadosBusca(novoDado){
         setDadosBusca({...dadosBusca, ...novoDado})
     }
 
     useEffect(() => {
-        if(dadosBusca.tipo) getDados()
-    },[dadosBusca])
+        if(dadosBusca.tipo) getMarcas()
+    },[dadosBusca.tipo])
 
     async function getTipos(){
         const res = await fetch(apiUrl, {
@@ -58,8 +65,31 @@ const AuthProvider = ({ children }) => {
               request: [ { acao: "obtertiposveiculos", }]
            }),
           })
-          let auxData = await res.json()
-          setTipos(auxData.tiposVeiculos)
+          let data = await res.json()
+          getMarcas()
+          setTipos(data.tiposVeiculos)
+    }   
+
+    async function getMarcas(){
+        const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: JSON.stringify({
+                request: [
+                    { 
+                        acao: "obterveiculos",
+                        params: { 
+                            busca: "veiculos",
+                            filtros: ['Marcas'],
+                            ...dadosBusca  },
+                            
+                    }
+                ]
+             })
+        })
+        let data = await res.json()
+        if(!data.busca) return
+        Object.keys(data.busca.filtros).includes('marcas') && setMarcas(data.busca.filtros.marcas);
     }   
 
     function clearDados(valorTipo) {
@@ -69,45 +99,29 @@ const AuthProvider = ({ children }) => {
     }
 
     async function getDados(){
-        const res = await fetch(apiUrl, {
+        let res =  await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: JSON.stringify({
-              request: [
-                  { 
-                      acao: "obterveiculos",
-                      params: { 
-                          busca: "veiculos",
-                          filtros: avancada ? ['Tudo'] : ['Marcas','Modelos'],
-                          ...dadosBusca  },
-                          
-                  }
-              ]
-           }),
-          })
-          let data = await res.json()
-          console.log(data)
-          if (Object.keys(data.busca).includes('filtros') && data.busca.filtros !== null) {   
-            Object.keys(data.busca.filtros).includes('marcas') && setMarcas(data.busca.filtros.marcas);
-            //   Object.keys(res).includes('modelos') && setModelos(res.modelos);
-            //   Object.keys(res).includes('versoes') ? setVersoes(res.versoes) : setVersoes([]);
-            //   Object.keys(res).includes('cores') && setCores(res.cores);
-            //   Object.keys(res).includes('combustiveis') && setCombustiveis(res.combustiveis);
-            //   Object.keys(res).includes('cidades') && setCidades(res.cidades);
-            //   Object.keys(res).includes('opcionais') && setOpcionais(res.opcionais);
-            //   Object.keys(res).includes('categorias') && setCategorias(res.categorias);
-          }
+            body: JSON.stringify({ 
+                request: [{ acao: "obterveiculos", params: { busca: "veiculos", pagina : 1,...dadosBusca} }] 
+            })
+        })
+        let data = await res.json()
+        if(!data.busca) return
+        Object.keys(data.busca).includes('veiculos') && setVeiculos(data.busca.veiculos)
+        Object.keys(data.busca).includes('resultados') && setTotalResultados(data.busca.resultados)
     }
 
     function handleBuscar(){
-        if(router.pathname == "/") return router.push("/busca")
         getDados()
+        if(router.pathname == "/") router.push("/busca")
     }
-    console.log(dadosBusca)
     return (
         <AuthContext.Provider value={{
             avancada,
             setAvancada,
+            veiculos,
+            totalResultados,
             loadingContext,
             tipos,
             marcas,

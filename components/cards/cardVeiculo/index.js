@@ -91,6 +91,7 @@ export default function CardVeiculo(props) {
       </Link>
     )
   }
+  
   if(grade) return <GradeItem/>
   return (
     <Link 

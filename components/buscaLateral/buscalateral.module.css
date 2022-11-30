@@ -1,5 +1,5 @@
 .container{
-    width: 200px;
+    /* width: 200px; */
     padding-right: 15px;
     padding-bottom: 20px;
     border-bottom: 1px solid #adadad;
@@ -10,6 +10,7 @@
     width: 200px;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     margin: 20px 0;
 }
 .buscaLabel{

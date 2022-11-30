@@ -27,7 +27,7 @@ export default function VeiculosList(props) {
         </div>
         <div className={grade ? styles.containerGrade : styles.containerList}>
             {
-              veiculos.map((veiculo , index) => {
+              veiculos.length ? veiculos.map((veiculo , index) => {
                 return(
                   <CardVeiculo
                     data={veiculo}
@@ -36,6 +36,7 @@ export default function VeiculosList(props) {
                   />
                 )
               })
+              : null
             }
         </div>
         {
