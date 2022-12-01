@@ -17,6 +17,7 @@ function removerSpecialsUrl(texto) {
     texto = texto.replace(/[ÈÉÊË]/,"E");
     texto = texto.replace(/[Ç]/,"C");
     texto = texto.replace(/[ç]/,"c");
+    texto = texto.replace('/','-')
     return texto.replace(/[^a-z0-9]/gi,'-'); 
 }
 

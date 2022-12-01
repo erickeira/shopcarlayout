@@ -1,6 +1,7 @@
 import CardVeiculo from '../cards/cardVeiculo';
 import styles from './veiculoslist.module.css';
 import {MdKeyboardArrowRight} from 'react-icons/md'
+import PageSelector from '../pageSelector';
 
 export default function VeiculosList(props) {
     const { 
@@ -12,8 +13,10 @@ export default function VeiculosList(props) {
       grade, 
       vermais, 
       labelTitulo,
-      labelTotal
-      } = props
+      labelTotal,
+      labelUmResultado,
+      paginacao
+    } = props
     
     return(
       <div className={styles.container}>
@@ -22,7 +25,13 @@ export default function VeiculosList(props) {
             labelTitulo ? 
             <span>{labelTitulo}</span>
             :
-            <span>{totalResultados} {labelTotal || 'resultados'}</span>
+            ( 
+              totalResultados < 2 ?
+              <span>{totalResultados == 1 ? totalResultados : 'Nenhum'} {labelUmResultado || 'resultado'}</span>
+              :
+              <span>{totalResultados} {labelTotal || 'resultados'}</span>
+            )
+
           }
         </div>
         <div className={grade ? styles.containerGrade : styles.containerList}>
@@ -39,6 +48,16 @@ export default function VeiculosList(props) {
               : null
             }
         </div>
+        {
+          paginacao ? 
+          <PageSelector 
+            pagina={pagina}
+            totalPaginas={totalPaginas}
+            callbackchange={(e) => callbackmudarpagina(e)}
+          />
+          : null
+        }
+
         {
           vermais  ?
           <div className={styles.containerVerMais}>

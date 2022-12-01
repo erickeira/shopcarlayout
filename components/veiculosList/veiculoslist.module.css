@@ -4,9 +4,10 @@
     width: 780px;
 }
 .containerList{
-    overflow: auto;
-    height: 100vh;
+    /* overflow: auto;
+    height: 100vh; */
     width: 740px;
+    padding: 20px 0;
 }
 .containerList::-webkit-scrollbar {
     display: none;

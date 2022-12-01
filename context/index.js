@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
     const [pageTitle, setPageTitle] = useState(``)
     const router = useRouter();
     const [pagina, setPagina] = useState(1)
+    const [totalPaginas, setTotalPaginas] = useState(0)
     const [avancada, setAvancada ] = useState(false);
     const [ loadingContext, setLoadingContext ] = useState(true);
     const [ tipos, setTipos ] = useState([]);    
@@ -45,8 +46,9 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         getTipos()
     },[])
+
     useEffect(() => {
-        getDados()
+        getVeiculos()
     },[pagina])
 
     function mudarDadosBusca(novoDado){
@@ -98,22 +100,25 @@ const AuthProvider = ({ children }) => {
         setModelos([]);setVersoes([]);setCores([]);setCidades([]);setCombustiveis([]);setOpcionais([]);setCategorias([]);
     }
 
-    async function getDados(){
+    async function getVeiculos(){
         let res =  await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: JSON.stringify({ 
-                request: [{ acao: "obterveiculos", params: { busca: "veiculos", pagina : 1,...dadosBusca} }] 
+                request: [{ acao: "obterveiculos", params: { busca: "veiculos", pagina : pagina,...dadosBusca} }] 
             })
         })
         let data = await res.json()
+        console.table(data.busca)
         if(!data.busca) return
         Object.keys(data.busca).includes('veiculos') && setVeiculos(data.busca.veiculos)
         Object.keys(data.busca).includes('resultados') && setTotalResultados(data.busca.resultados)
+        Object.keys(data.busca).includes('resultados') && setTotalPaginas(data.busca.paginas)
     }
 
     function handleBuscar(){
-        getDados()
+        setPagina(1)
+        getVeiculos()
         if(router.pathname == "/") router.push("/busca")
     }
     return (
@@ -138,7 +143,11 @@ const AuthProvider = ({ children }) => {
             clearDados,
             handleBuscar,
             pageTitle,
-            setPageTitle
+            setPageTitle,
+            pagina,
+            setPagina,
+            totalPaginas,
+            setTotalPaginas
         }}>
             { children }
         </AuthContext.Provider>
