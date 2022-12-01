@@ -30,6 +30,7 @@ export default function BuscaLateral(props){
         clearDados,
         handleBuscar
     } = useContext(AuthContext)
+    const anoAtual = new Date().getFullYear()
     
     const BotaoBusca = () => {
         if(!dadosBusca.tipo && !dadosBusca.marca){
@@ -73,30 +74,45 @@ export default function BuscaLateral(props){
                 callbackchange={(e) => mudarDadosBusca({marca : e.value})}
                 selecionado={dadosBusca.marca}
             />
+            {console.log(cores)}
             {
                 avancada ?
                 <>
                     <InputRangeSlider
                         titulo={`Ano`}
-                        min={``}
-                        max={``}
+                        min={1950}
+                        max={anoAtual}
+                        selecionado={[dadosBusca.anode || 1950, dadosBusca.anoate || anoAtual]}
+                        callbackchange={(e) => {mudarDadosBusca({anode : e.min,anoate : e.max});}}
                     />
                     <InputSelectMulti
                         titulo={'Cor'}
-                        options={[`Branco`,`Patra`,`Vermelho`].map(cor => {return {value: cor, label: cor}}) }
-                        callbackchange={(e) => mudarDadosBusca({marca : e.value})}
+                        options={cores.map(cor => {return {value: cor.nome, label: cor.nome}}) }
+                        callbackchange={(e) => mudarDadosBusca({cor : e.value})}
                         selecionado={dadosBusca.marca}
                     />
                     <InputRangeSlider
                         titulo={`Valor`}
-                        min={``}
-                        max={`10000000`}
+                        min={0}
+                        max={`300000`}
                         tipo={`moeda`}
+                        selecionado={[dadosBusca.valorde || 0, dadosBusca.valorate || `300000`]}
+                        callbackchange={(e) => {mudarDadosBusca({valorde : e.min,valorate : e.max});}}
                     />
                     <InputRangeSlider
                         titulo={`Quilometragem (Km)`}
-                        min={``}
-                        max={``}
+                        min={0}
+                        max={100000}
+                        step={500}
+                        tipo={`km`}
+                        selecionado={[dadosBusca.kmde || 0, dadosBusca.kmate || 100000]}
+                        callbackchange={(e) => {mudarDadosBusca({kmde : e.min,kmate : e.max});}}
+                    />
+                    <InputSelectMulti
+                        titulo={'Opcionais'}
+                        options={opcionais.map(opcao => {return {value: opcao.nome, label: opcao.nome}}) }
+                        callbackchange={(e) => mudarDadosBusca({opcionais : e.map(item => { return item.value })})}
+                        selecionado={dadosBusca.opcionais}
                     />
                 </>
                 : null

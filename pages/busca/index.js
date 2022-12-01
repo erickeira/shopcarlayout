@@ -11,7 +11,7 @@ import Ads from '../../components/ads/ads'
 
 
 export default function Busca(props) {
-  const {setPageTitle, dadosBusca, veiculos, totalResultados, pagina, totalPaginas, setPagina} = useContext(AuthContext)
+  const {setPageTitle, dadosBusca, veiculos, totalResultados, pagina, totalPaginas, setPagina, loadingBusca} = useContext(AuthContext)
 
   useEffect(() =>{
     setPageTitle(`Busca por ${dadosBusca.tipo} ${dadosBusca.marca} nos Classificados de Veículos do SHOPCAR`)
@@ -30,6 +30,7 @@ export default function Busca(props) {
           totalResultados={totalResultados}
           callbackmudarpagina={(res) => setPagina(res)}
           paginacao
+          loading={loadingBusca}
         />
         <Ads/>
       </div>

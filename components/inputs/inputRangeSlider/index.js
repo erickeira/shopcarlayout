@@ -5,9 +5,9 @@ import styles from './inputrangeslider.module.css'
 
 
 export default function InputRangeSlider(props) {
-  const { range, titulo, callbackchange, min, max, tipo} = props
+  const { range, titulo, callbackchange, min, max, tipo, selecionado, step} = props
   
-  const [value, setValue] = useState([min || 1980, max || 2022]);
+  const [value, setValue] = useState(selecionado|| [0,1]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -16,7 +16,7 @@ export default function InputRangeSlider(props) {
 
   const labelFormat = (valor) => {
     if(tipo == 'moeda') return formatadorValor(valor)
-    if(tipo == 'km') return (valor.toString() + ' km')
+    if(tipo == 'km') return (valor.toLocaleString('pt-BR') + ' km')
     return valor
   }
 
@@ -26,9 +26,10 @@ export default function InputRangeSlider(props) {
       <Slider
         getAriaLabel={() => 'Temperature range'}
         value={value}
-        min={min || 1980}
-        max={max || 2022}
+        min={min || 0}
+        max={max || 1000}
         onChange={handleChange}
+        step={step}
         sx={{
           color: '#800'
         }}

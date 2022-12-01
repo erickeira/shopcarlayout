@@ -9,8 +9,12 @@ export default function PageSelector(props){
     )
 
     useEffect(() => {
-        if(paginas.indexOf(pagina) < 0) montaPaginas()
-    },[pagina])
+        Array.from({length: (totalPaginas < 5 ? (totalPaginas || 1) : 5)}, (_, i) => i + pagina)
+    },[totalPaginas])
+
+    // useEffect(() => {
+    //     if(paginas.indexOf(pagina) < 0) montaPaginas()
+    // },[pagina])
     
     function nextPaginas(){
         let ultimaPosicao = paginas[paginas.length - 1]

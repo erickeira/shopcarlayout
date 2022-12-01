@@ -42,3 +42,12 @@
 .vermais{
     color: #800;
 }
+.sugestoesTitulo{
+    font-size: 16px;
+    display: block;
+    margin-bottom:  15px;
+}
+.sugestoes{
+    display: block;
+    margin-bottom:  5px;
+}

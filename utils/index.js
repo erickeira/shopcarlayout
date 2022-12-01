@@ -1,5 +1,5 @@
 const apiUrl = "https://api-dev.shopcar.com.br/";
-const urlImg = "https://cdn-dev.shopcar.com.br/redim/360/stored/veiculos/"
+const urlImg = "https://cdn-dev.shopcar.com.br/"
 
 
 function formatadorValor(valor){

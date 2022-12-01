@@ -15,7 +15,8 @@ export default function VeiculosList(props) {
       labelTitulo,
       labelTotal,
       labelUmResultado,
-      paginacao
+      paginacao,
+      loading
     } = props
     
     return(
@@ -42,10 +43,25 @@ export default function VeiculosList(props) {
                     data={veiculo}
                     key={index}
                     grade={grade}
+                    loading={loading}
                   />
                 )
               })
-              : null
+              : (
+                loading ?
+                <>
+                  <CardVeiculo loading={true} />
+                  <CardVeiculo loading={true} />
+                </>
+                : 
+                <div>
+                  <span className={styles.sugestoesTitulo}>Sugestões:</span>
+                  {/* <span className={styles.sugestoes}>- Certifique-se que as palavras foram digitadas corretamente.</span>
+                  <span className={styles.sugestoes}>- Verifique se a palavra digitada está coerente com o tipo e marca selecionados.</span> */}
+                  <span className={styles.sugestoes}>- Confira os filtros utilizados na busca. Remova um ou mais para obter maiores resultados.</span>
+                  {/* <span className={styles.sugestoes}>- Tente usar menos palavras.</span> */}
+                </div>
+              )
             }
         </div>
         {

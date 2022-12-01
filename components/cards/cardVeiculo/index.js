@@ -3,11 +3,11 @@ import styles from './cardveiculo.module.css'
 import Image from 'next/image'
 import { formatadorValor, getUrlImg, removerSpecialsUrl, urlImg } from '../../../utils'
 import Link from 'next/link'
-import {MdLocalGasStation, MdDateRange} from 'react-icons/md'
+import {MdLocalGasStation, MdDateRange, MdShutterSpeed} from 'react-icons/md'
 import {GiFoundryBucket} from 'react-icons/gi'
 
 export default function CardVeiculo(props) {
-  const { data, grade} = props
+  const { data , grade, loading} = props
   const {
     ano,
     anomodelo,
@@ -31,9 +31,9 @@ export default function CardVeiculo(props) {
     selos,
     temfotos,
     zerok,
-  } = data
-  const urlamigavel = `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}`
-
+  } = data || []
+  const urlamigavel = data && data.length ? `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}` : ''
+  const fotoIndisponivel = `images/indisponivel.svg?v=1`
   const GradeItem = () => {
     return(
       <Link 
@@ -44,7 +44,7 @@ export default function CardVeiculo(props) {
       >
         <div className={styles.container}>
             <Image
-                src={urlImg + data.foto1}
+                src={data.foto1 ? `${urlImg}/redim/360/stored/veiculos/${data.foto1}` : `${urlImg}${fotoIndisponivel}`}
                 width={170}
                 height={120}
                 className={styles.foto}
@@ -91,8 +91,41 @@ export default function CardVeiculo(props) {
       </Link>
     )
   }
+
+  const Loading = () => {
+    return(
+      <div className={styles.containerListMascara}>
+        <div style={{backgroundColor: '#d1d1d1', height: 120,width: 240, borderRadius: 2, marginBottom: 5}}/>
+        <div className={styles.containerModeloInfos}>
+          <div style={{backgroundColor: '#d1d1d1', height: 30,width: 200, borderRadius: 2, marginBottom: 5}}/>
+          <div className={styles.containerInfoValorAnunciante}>
+            <div className={styles.containerInfosList}>
+              <div className={styles.containerInfosGrid}>
+                <div style={{backgroundColor: '#d1d1d1', height: 25,width: 100, borderRadius: 2, marginBottom: 3}}/>
+                <div style={{backgroundColor: '#d1d1d1', height: 25,width: 100, borderRadius: 2, marginBottom: 3}}/>
+                <div style={{backgroundColor: '#d1d1d1', height: 25,width: 100, borderRadius: 2, marginBottom: 3}}/>
+                <div style={{backgroundColor: '#d1d1d1', height: 25,width: 100, borderRadius: 2, marginBottom: 3}}/>
+              </div>
+            </div>
+            <div className={styles.containerValorList}>
+              <div style={{backgroundColor: '#d1d1d1', height: 30,width: 140, borderRadius: 2, marginBottom: 3}}/>
+              <div style={{backgroundColor: '#d1d1d1', height: 20,width: 100, borderRadius: 2, marginBottom: 3}}/>
+            </div>
+          
+          </div>
+
+      </div>
+      <div className={styles.containerAnuncianteList}>
+        <div style={{backgroundColor: '#d1d1d1', height: 60,width: 120, borderRadius: 2, marginBottom: 3}}/>
+        <div style={{backgroundColor: '#d1d1d1', height: 15,width: 100, borderRadius: 2, marginBottom: 3}}/>
+      </div>
+      
+    </div>
+    )
+  }
   
   if(grade) return <GradeItem/>
+  if(loading && !grade) return <Loading/>
   return (
     <Link 
         href={{
@@ -102,7 +135,7 @@ export default function CardVeiculo(props) {
       >
         <div className={styles.containerList}>
             <Image
-                src={urlImg + data.foto1}
+                src={data.foto1 ? `${urlImg}/redim/360/stored/veiculos/${data.foto1}` : `${urlImg}${fotoIndisponivel}`}
                 width={170}
                 height={120}
                 className={styles.foto}
@@ -140,7 +173,7 @@ export default function CardVeiculo(props) {
                     {
                       km &&
                       <div className={styles.itemInfoList}>
-                        <MdLocalGasStation size={16}/>
+                        <MdShutterSpeed size={16}/>
                         <span className={styles.infoList}>{km} Km</span>
                       </div>
                     }

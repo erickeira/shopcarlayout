@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { apiUrl, formatadorValor, getUrlImg} from '../../utils';
+import { apiUrl, formatadorValor, getUrlImg ,urlImg} from '../../utils';
 import styles from  './visualizacao.module.css';
 import { MdDone, MdFavoriteBorder,MdShare, MdCall, MdLocationOn, MdDirectionsCar, MdVerifiedUser } from 'react-icons/md'
 import { AiFillPrinter } from 'react-icons/ai'
@@ -16,7 +16,7 @@ export default function Visualizacao(props){
     const {setPageTitle} = useContext(AuthContext)
     const { veiculo } = props.data
     const { anunciante } = veiculo
-    const urlImg = getUrlImg(1000)
+    
 
     useEffect(() => {
         setPageTitle(`${veiculo.marca} - ${veiculo.modelo}`)
@@ -24,17 +24,17 @@ export default function Visualizacao(props){
 
     const ImageSlider = () => {
         const imagens = veiculo.fotos
-        const [imagemSelecionada, setImagemSelecionada] = useState(imagens[0])
+        const [imagemSelecionada, setImagemSelecionada] = useState(imagens[0] || null)
         const [animationData, setAnimationData] = useState();
-
+        const fotoIndisponivel = `images/foto_indisponivel.png`
         // useEffect(() => {
         //   import('../../assets/anim/loading.json').then(setAnimationData);
         // }, []);
-
+        console.log(imagemSelecionada)
         return(
             <div className={styles.containerImageSlider}>
                 <Image
-                    src={urlImg + imagemSelecionada}
+                    src={imagens.length ? `${getUrlImg(1000)}${imagemSelecionada}` : `${urlImg}${fotoIndisponivel}`}
                     width={500}
                     height={375}
                     className={styles.fotoImageSlider}

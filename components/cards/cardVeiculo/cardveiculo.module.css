@@ -12,6 +12,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .foto{
+    background-color: #d1d1d1;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -136,3 +137,28 @@
 .localidadeAnunciante{
     font-size: 12px;
 }
+
+@keyframes flickerAnimation { /* flame pulses */
+    0%   { opacity:1; }
+    20%  { opacity:0.75; }
+    40%  { opacity:0.5; }
+    60%  { opacity:0.25; }
+    80%  { opacity:0.5; }
+    100% { opacity:0.75; }
+  }
+  .containerListMascara {
+        height: 120px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        display: flex;
+        flex-direction: row;
+        padding-right: 20px;
+      opacity:1;  
+      animation: flickerAnimation 2s infinite;
+  }
+
+
