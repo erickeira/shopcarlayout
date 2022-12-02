@@ -18,22 +18,17 @@ export default function VeiculosList(props) {
       paginacao,
       loading
     } = props
+    const LabelResultados = () =>{
+      if(loading) return <span>Buscando...</span>
+      if(labelTitulo) return <span>{labelTitulo}</span>
+      if(totalResultados < 2) return <span>{totalResultados == 1 ? totalResultados : 'Nenhum'} {labelUmResultado || 'resultado'}</span>
+      return  <span>{totalResultados} {labelTotal || 'resultados'}</span>
+    }
     
     return(
       <div className={styles.container}>
         <div className={styles.containerTotal}>
-          {
-            labelTitulo ? 
-            <span>{labelTitulo}</span>
-            :
-            ( 
-              totalResultados < 2 ?
-              <span>{totalResultados == 1 ? totalResultados : 'Nenhum'} {labelUmResultado || 'resultado'}</span>
-              :
-              <span>{totalResultados} {labelTotal || 'resultados'}</span>
-            )
-
-          }
+          <LabelResultados/>
         </div>
         <div className={grade ? styles.containerGrade : styles.containerList}>
             {

@@ -11,6 +11,7 @@ import BuscaLateral from '../components/buscaLateral'
 import Ads from '../components/ads/ads'
 import { AuthContext } from '../context'
 import {MdFilterListAlt, MdStore} from 'react-icons/md'
+import NoticiaHome from '../components/noticiasHome'
 
 export async function getServerSideProps(context) {
   const res = await fetch(apiUrl, {
@@ -38,15 +39,13 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
-  const { busca } = props.data
+  const { busca, noticias } = props.data
   const [ destaques, setDestaques ] = useState(busca.veiculos);  
-  const [ noticias, setNoticias ] = useState([]);
   const [pagina, setPagina] = useState(1)
   const [totalPaginas, setTotalPaginas] = useState(1)
   const [totalResultados, setTotalResultados] = useState(0)
   const { setPageTitle } = useContext(AuthContext) 
   useEffect(() => {setPageTitle(``)},[busca])
-
   return (
     <div className={styles.container}>
       <div  className={styles.containerMenuList}>
@@ -66,18 +65,22 @@ export default function Home(props) {
           </div>
           
         </MenuLateral>
-        <VeiculosList
-          veiculos={destaques}
-          pagina={pagina}
-          labelTitulo={'Destaques'}
-          totalPaginas={totalPaginas}
-          totalResultados={totalResultados}
-          callbackmudarpagina={(res) => setPagina(res)}
-          grade
-          vermais
-        />
+        <div>
+          <VeiculosList
+            veiculos={destaques}
+            pagina={pagina}
+            labelTitulo={'Destaques'}
+            totalPaginas={totalPaginas}
+            totalResultados={totalResultados}
+            callbackmudarpagina={(res) => setPagina(res)}
+            grade
+            vermais
+          />
+          <NoticiaHome noticias={noticias} />
+        </div>
         <Ads/>
       </div>
+
     </div>
   )
 }

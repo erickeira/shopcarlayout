@@ -74,7 +74,6 @@ export default function BuscaLateral(props){
                 callbackchange={(e) => mudarDadosBusca({marca : e.value})}
                 selecionado={dadosBusca.marca}
             />
-            {console.log(cores)}
             {
                 avancada ?
                 <>

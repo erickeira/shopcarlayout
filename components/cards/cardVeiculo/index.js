@@ -30,10 +30,30 @@ export default function CardVeiculo(props) {
     preco2,
     selos,
     temfotos,
-    zerok,
+    zerokm,
   } = data || []
   const urlamigavel = data && data.length ? `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}` : ''
   const fotoIndisponivel = `images/indisponivel.svg?v=1`
+  const FeiraoMarker = () => {return (
+    <Image
+      src={`${urlImg}/images/icone-feirao.svg`}
+      width={70}
+      height={35}
+      style={{position: 'absolute', left: -3, top: -10}}
+      alt={``}
+      priority={1}
+    />
+  )}
+  const ZeroKmMarker = () => {return (
+    <Image
+      src={`${urlImg}/images/icone-zero-km.svg`}
+      width={50}
+      height={50}
+      style={{position: 'absolute', left: -4, top: -5}}
+      alt={``}
+      priority={1}
+    />
+  )}
   const GradeItem = () => {
     return(
       <Link 
@@ -41,8 +61,11 @@ export default function CardVeiculo(props) {
           pathname: urlamigavel ,
           query: { id: id },
         }}
+        style={{position: 'relative'}}
       >
         <div className={styles.container}>
+            {destaquefeirao == 1 ? <FeiraoMarker/> : null}
+            {zerokm == 1 && destaquefeirao == 0 ? <ZeroKmMarker/> : null}
             <Image
                 src={data.foto1 ? `${urlImg}/redim/360/stored/veiculos/${data.foto1}` : `${urlImg}${fotoIndisponivel}`}
                 width={170}
@@ -95,6 +118,7 @@ export default function CardVeiculo(props) {
   const Loading = () => {
     return(
       <div className={styles.containerListMascara}>
+
         <div style={{backgroundColor: '#d1d1d1', height: 120,width: 240, borderRadius: 2, marginBottom: 5}}/>
         <div className={styles.containerModeloInfos}>
           <div style={{backgroundColor: '#d1d1d1', height: 30,width: 200, borderRadius: 2, marginBottom: 5}}/>

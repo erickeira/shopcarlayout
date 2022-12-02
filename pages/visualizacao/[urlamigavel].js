@@ -30,7 +30,6 @@ export default function Visualizacao(props){
         // useEffect(() => {
         //   import('../../assets/anim/loading.json').then(setAnimationData);
         // }, []);
-        console.log(imagemSelecionada)
         return(
             <div className={styles.containerImageSlider}>
                 <Image
@@ -338,7 +337,6 @@ export async function getServerSideProps(context) {
         }),
     })
     const data = await res.json()
-    console.log(data)
     return {
       props: { data }, // will be passed to the page component as props
     }

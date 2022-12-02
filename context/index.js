@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
     });
     const [veiculos, setVeiculos] = useState([])
     const [totalResultados, setTotalResultados] = useState([])
-    const [loadingBusca, setLoadingBusca] = useState(false)
+    const [loadingBusca, setLoadingBusca] = useState(true)
 
     useEffect(() => {
         getTipos()
@@ -57,6 +57,7 @@ const AuthProvider = ({ children }) => {
             }
         })
         setDadosBusca(auxDadosBusca)
+        getVeiculos(auxDadosBusca)
     },[query])
 
     useEffect(() => {
@@ -75,7 +76,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         if(dadosBusca.tipo) {
             getMarcas()
-            mudarDadosBusca({ marca : ''})
+            // mudarDadosBusca({ marca : ''})
         }
 
     },[dadosBusca.tipo])
@@ -147,17 +148,17 @@ const AuthProvider = ({ children }) => {
         setModelos([]);setVersoes([]);setCores([]);setCidades([]);setCombustiveis([]);setOpcionais([]);setCategorias([]);
     }
 
-    async function getVeiculos(){
+    async function getVeiculos(dados){
         setLoadingBusca(true)
         let res =  await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: JSON.stringify({ 
-                request: [{ acao: "obterveiculos", params: { busca: "veiculos", pagina : pagina,...dadosBusca} }] 
+                request: [{ acao: "obterveiculos", params: { busca: "veiculos", pagina : pagina,... dados || dadosBusca} }] 
             })
         })
         let data = await res.json()
-        if(!data.busca) return
+        if(!data.busca) return setLoadingBusca(false)
         Object.keys(data.busca).includes('veiculos') && setVeiculos(data.busca.veiculos)
         Object.keys(data.busca).includes('resultados') && setTotalResultados(data.busca.resultados)
         Object.keys(data.busca).includes('resultados') && setTotalPaginas(data.busca.paginas)

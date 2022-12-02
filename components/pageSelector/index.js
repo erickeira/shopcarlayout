@@ -8,27 +8,19 @@ export default function PageSelector(props){
         Array.from({length: (totalPaginas < 5 ? (totalPaginas || 1) : 5)}, (_, i) => i + pagina)
     )
 
-    useEffect(() => {
-        Array.from({length: (totalPaginas < 5 ? (totalPaginas || 1) : 5)}, (_, i) => i + pagina)
-    },[totalPaginas])
 
-    // useEffect(() => {
-    //     if(paginas.indexOf(pagina) < 0) montaPaginas()
-    // },[pagina])
     
     function nextPaginas(){
-        let ultimaPosicao = paginas[paginas.length - 1]
-        let quantidadeBotoes = (totalPaginas - ultimaPosicao) < 5 ? (totalPaginas - ultimaPosicao) : 5
-        let novasPaginas = Array.from({length: (totalPaginas < 5 ? (totalPaginas || 1) : quantidadeBotoes)}, (_, i) => i + ultimaPosicao + 1)
-        setPaginas(novasPaginas)
-        callbackchange(paginas[paginas.length - 1] + 1)
+        // let ultimaPosicao = paginas[paginas.length - 1]
+        // let quantidadeBotoes = (totalPaginas - ultimaPosicao) < 5 ? (totalPaginas - ultimaPosicao) : 5
+        // let novasPaginas = Array.from({length: (totalPaginas < 5 ? (totalPaginas || 1) : quantidadeBotoes)}, (_, i) => i + ultimaPosicao + 1)
+        // setPaginas(novasPaginas)
+        // callbackchange(paginas[paginas.length - 1] + 1)
     }
 
     function montaPaginas(){
 
     }
-
-
 
 
     return(
