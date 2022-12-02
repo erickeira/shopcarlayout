@@ -16,6 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    justify-content: center;
 }
 .containerTotal{
     padding: 20px 0;

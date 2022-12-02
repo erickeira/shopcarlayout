@@ -65,7 +65,7 @@ export default function Home(props) {
           </div>
           
         </MenuLateral>
-        <div>
+        <div className={styles.containerContent}>
           <VeiculosList
             veiculos={destaques}
             pagina={pagina}

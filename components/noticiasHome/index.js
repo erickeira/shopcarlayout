@@ -8,12 +8,12 @@ export default function NoticiaHome(props){
     return(
         <div className={styles.container}>
             <div className={styles.primeirasNoticias}>
-                <div>
+                <div className={styles.containerPrimeiraNoticia}>
                     <Image
                         src={`${urlImg}/stored/news/${noticias.itens[0].foto1}`}
-                        width={400}
-                        height={300}
-                        style={{}}
+                        width={420}
+                        height={320}
+                        className={styles.imageNoticia}
                         alt={``}
                         priority={1}
                     />
@@ -22,25 +22,31 @@ export default function NoticiaHome(props){
                     </div>
                 </div>
                 <div className={styles.noticiasDireita}>
-                    <div>
+                    <div className={styles.noticiaDireita}>
                         <Image
                             src={`${urlImg}/stored/news/${noticias.itens[1].foto1}`}
                             width={320}
                             height={148}
-                            style={{}}
+                            className={styles.imageNoticia}
                             alt={``}
                             priority={1}
                         />
+                        <div className={styles.containerTituloNoticia}>
+                            <span>{noticias.itens[1].titulo}</span>
+                        </div>
                     </div>
-                    <div>
+                    <div className={styles.noticiaDireita}>
                         <Image
                             src={`${urlImg}/stored/news/${noticias.itens[2].foto1}`}
                             width={320}
                             height={148}
-                            style={{}}
+                            className={styles.imageNoticia}
                             alt={``}
                             priority={1}
                         />
+                        <div className={styles.containerTituloNoticia}>
+                            <span>{noticias.itens[2].titulo.substring(0, 50)}</span>
+                        </div>
                     </div>
                 </div>
             </div>

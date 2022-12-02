@@ -32,7 +32,7 @@ export default function CardVeiculo(props) {
     temfotos,
     zerokm,
   } = data || []
-  const urlamigavel = data && data.length ? `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}` : ''
+  const urlamigavel = !loading ? `/visualizacao/${marca.toLowerCase().replace(' ', '-')}-${removerSpecialsUrl(modelo.toLowerCase().replace(' ', '-'))}-${removerSpecialsUrl(anomodelo.toLowerCase().replace(' ', '-'))}-${cor.toLowerCase()}` : ''
   const fotoIndisponivel = `images/indisponivel.svg?v=1`
   const FeiraoMarker = () => {return (
     <Image
@@ -114,6 +114,7 @@ export default function CardVeiculo(props) {
       </Link>
     )
   }
+
 
   const Loading = () => {
     return(

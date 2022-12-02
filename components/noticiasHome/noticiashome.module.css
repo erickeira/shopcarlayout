@@ -1,32 +1,50 @@
 .container{
     width: 750px;
     height: 300px;
-    margin-bottom: 60px;
+    margin: 0 auto;
 }
 .primeirasNoticias{
     position: relative;
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 25px;
 }
 .containerPrimeiraNoticia{
     position: relative;
-    width: 400px;
-    height: 300px;
+    width: 420px;
+    height: 320px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 3px;
 }
 .noticiasDireita{
-
+    position: relative;
+    display: grid;
+    gap: 25px;
+}
+.noticiaDireita{
+    width: 320px;
+    height: 148px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 3px;
 }
 
 .containerTituloNoticia{
-    width: 400px;
+    font-size: 14px;
+    width:  100%;
     position: absolute;
     bottom: 0;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    padding: 15px 10px;
+}
+
+.imageNoticia:hover{
+    transform: scale(1.2);
+    transition-duration: 2s;
 }

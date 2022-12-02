@@ -4,12 +4,15 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { apiUrl, formatadorValor, getUrlImg ,urlImg} from '../../utils';
 import styles from  './visualizacao.module.css';
-import { MdDone, MdFavoriteBorder,MdShare, MdCall, MdLocationOn, MdDirectionsCar, MdVerifiedUser } from 'react-icons/md'
+import { MdDone, MdFavoriteBorder,MdShare, MdCall, MdLocationOn, MdDirectionsCar, MdVerifiedUser,MdSearch} from 'react-icons/md'
 import { AiFillPrinter } from 'react-icons/ai'
 import {  FaClipboardList } from 'react-icons/fa'
 import termometro from '../../public/assets/termometro.png'
 import { AuthContext } from '../../context';
 import Ads from '../../components/ads/ads';
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from 'react-image-gallery';
+
 
 
 export default function Visualizacao(props){
@@ -22,83 +25,6 @@ export default function Visualizacao(props){
         setPageTitle(`${veiculo.marca} - ${veiculo.modelo}`)
     },[veiculo])
 
-    const ImageSlider = () => {
-        const imagens = veiculo.fotos
-        const [imagemSelecionada, setImagemSelecionada] = useState(imagens[0] || null)
-        const [animationData, setAnimationData] = useState();
-        const fotoIndisponivel = `images/foto_indisponivel.png`
-        // useEffect(() => {
-        //   import('../../assets/anim/loading.json').then(setAnimationData);
-        // }, []);
-        return(
-            <div className={styles.containerImageSlider}>
-                <Image
-                    src={imagens.length ? `${getUrlImg(1000)}${imagemSelecionada}` : `${urlImg}${fotoIndisponivel}`}
-                    width={500}
-                    height={375}
-                    className={styles.fotoImageSlider}
-                    alt={``}
-                    priority={1}
-                />
-                <ul className={styles.containerFotosMiniatura}>
-                    {
-                        imagens.map((imagem,index) => {
-                            return(
-                                <li key={index} onClick={() => setImagemSelecionada(imagem)}>
-                                    <Image
-                                        src={getUrlImg(100) + imagem}
-                                        width={50}
-                                        height={38}
-                                        className={imagemSelecionada == imagem ? styles.fotoMiniaturaSelecionada :  styles.fotoMiniatura}
-                                        alt={``}
-                                        priority={1}
-                                    />
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-                <span className={styles.responsabiliza}>*O ShopCar não se responsabiliza pelas informações e fotos contidas neste anúncio, sendo todas elas única e exclusivamente de responsabilidade do anunciante.</span>
-                {
-                    veiculo.tabela_valores && 
-                    <div className={styles.containerTabelaDeValores}>
-                        <span className={styles.titulo}>Tabela de valores SHOPCAR</span>
-                        <div className={styles.containerImagemInfos}>
-                            <Image
-                                src={termometro}
-                                alt=''
-                                style={{marginRight: 20}}
-                            />
-                            <div>
-                                <div className={styles.containerInfoValor}>
-                                    <span className={styles.infoValor}>Maior valor anunciado:</span>
-                                    <span className={styles.valor}>
-                                        {veiculo.tabela_valores.maximo}
-                                    </span>
-                                </div>
-                                <div className={styles.containerInfoValor}>
-                                    <span className={styles.infoValor}>Valor médio anunciado:</span>
-                                    <span className={styles.valor}>
-                                        {veiculo.tabela_valores.media}
-                                    </span>
-                                </div>
-                                <div className={styles.containerInfoValor}>
-                                    <span className={styles.infoValor}>Menor valor anunciado:</span>
-                                    <span className={styles.valor}>
-                                        {veiculo.tabela_valores.minimo}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <span className={styles.responsabiliza}>
-                        **Esta tabela é uma referência de valores de veículos anunciados no site. Em caso de dúvidas, realize uma consulta à tabela FIPE através do site www.fipe.org.br
-                        </span>
-                    </div>
-                }
-
-            </div>
-        )
-    }
     const Detalhes = () => {
         return(
             <div className={styles.containerDetalhes}>
@@ -317,7 +243,24 @@ export default function Visualizacao(props){
     return(
         <div>
             <div className={styles.containerSliderDetalhes}>
-                <ImageSlider/>
+                <div className={styles.containerImageSlider}>
+                    <ImageGallery 
+                        lazyLoad={true} 
+                        showFullscreenButton={true} 
+                        items={veiculo.fotos.map(foto => {return {original: `${getUrlImg(1000)}${foto}`, thumbmail: `${getUrlImg(50)}${foto}`}})} 
+                        useBrowserFullscreen={ false }
+                        showPlayButton={false}
+                        showThumbnails={true}
+                        thumbnailPosition={`bottom`}
+                        renderFullscreenButton={(onClick, isFullscreen) => {
+                            return(
+                                <div style={{position: 'absolute', color: '#fff', right: 10, bottom: 10}} onClick={onClick}>
+                                    <MdSearch size={30}/>
+                                </div>
+                            )
+                        }}
+                    />
+                </div>
                 <Detalhes/>
                 <Ads/>
             </div>
